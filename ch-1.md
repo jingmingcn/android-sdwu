@@ -77,7 +77,7 @@ jingming@sdu.edu.cn
 ---
 ## Gradle 代理配置
 
-1. 在用户目录下找到 `.gradle` 文件夹（如 C:\Users\YourUsername\.gradle）
+1. 在用户目录下找到 `.gradle` 文件夹（如 C:\Users\YourUsername\\.gradle）
 2. 编辑或创建 `init.gradle` 文件，添加以下内容：
 ---
 ```groovy
