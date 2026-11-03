@@ -4,7 +4,7 @@ size: 16:9
 theme: am_purple
 paginate: true
 # headingDivider: [2,3,4]
-footer: \ *井明（数据科学与计算机学院）* *移动应用开发（Android+Kotlin）* *2025年秋*
+footer: \ *张丽，井明（数据科学与计算机学院）* *移动应用开发（Android+Kotlin）* *2026年秋*
 ---
 
 <!-- _class: cover_e -->
@@ -16,15 +16,15 @@ footer: \ *井明（数据科学与计算机学院）* *移动应用开发（And
 
 ###### “Any sufficiently advanced app is indistinguishable from magic.”
 
-井明
+张丽，井明
 数据科学与计算机学院
 jingming@sdu.edu.cn
-2025年秋
+2026年秋
 
 ---
 
 <!-- _header: 目录<br>CONTENTS<br>![](images/logo_1_transparent.png)-->
-<!-- _class: toc_a -->
+<!-- _class: toc_b -->
 <!-- _footer: "" -->
 <!-- _paginate: "" -->
 
@@ -34,6 +34,25 @@ jingming@sdu.edu.cn
 - [控制语句](#0)
 - [函数与Lambda](#0)
 - [面向对象编程](#0)
+
+
+---
+<!-- Scoped style -->
+<style scoped>
+section.toc_b ul {
+  counter-set: toc_b 6;
+}
+section.toc_b ul li {
+  counter-increment: toc_b;
+} 
+</style>
+
+<!-- _header: 目录<br>CONTENTS<br>![](images/logo_1_transparent.png)-->
+<!-- _class: toc_b -->
+<!-- _footer: "" -->
+<!-- _paginate: "" -->
+
+
 - [集合与泛型](#0)
 - [空安全机制](#0)
 - [扩展与高阶函数](#0)
@@ -433,17 +452,279 @@ data class Person(val id: Int, val name: String) {
 #### 课堂练习 (进阶)
 
 1.	写一个 data class Book(val title: String, val authors: List<String>, val year: Int)，演示 toString, copy, 与解构。
+
 2.	证明 data class D(val arr: IntArray) 的两个实例即便数组内容相同也不相等，并修改类使之基于数组内容相等。
+
 3.	说明为什么下面代码会导致 map[p] 返回 null：
+
 ```kotlin
 data class P(var name: String)
-val p = P("a"); val m = hashMapOf(p to 1)
+val p = P("a"); 
+val m = hashMapOf(p to 1)
 p.name = "b"
 println(m[p])
 ```
+
 4.	把一个普通的 Java POJO 转换成 Kotlin data class，比较可读性和样板代码的减少。
 
 ---
+
+#### 参考答案 （第1题）
+
+```kotlin
+data class Book(
+    val title: String,
+    val authors: List<String>,
+    val year: Int
+)
+
+fun main() {
+    // 创建 Book 对象
+    val book1 = Book(
+        "Kotlin 程序设计",
+        listOf("张三", "李四"),
+        2025
+    )
+
+    // 1. toString()
+    println(book1)
+
+    // 2. copy()
+    val book2 = book1.copy(year = 2026)
+
+    println(book2)
+
+    // 3. 解构
+    val (title, authors, year) = book1
+
+    println("书名：$title")
+    println("作者：$authors")
+    println("出版年份：$year")
+}
+
+Output:
+
+Book(title=Kotlin 程序设计, authors=[张三, 李四], year=2025)
+Book(title=Kotlin 程序设计, authors=[张三, 李四], year=2026)
+书名：Kotlin 程序设计
+作者：[张三, 李四]
+出版年份：2025
+```
+
+----
+
+#### 参考答案 （第2题）
+
+```kotlin
+
+data class D(val arr: IntArray)
+
+fun main() {
+    val d1 = D(intArrayOf(1, 2, 3))
+    val d2 = D(intArrayOf(1, 2, 3))
+
+    println(d1)
+    println(d2)
+
+    println(d1 == d2)
+}
+
+Output:
+D(arr=[1, 2, 3])
+D(arr=[1, 2, 3])
+false
+
+```
+
+---
+
+<!-- _footer: '' -->
+
+修改方法：自己实现 equals() 和 hashCode()
+
+```kotlin
+class D(val arr: IntArray) {
+
+    override fun equals(other: Any?): Boolean {
+        if (this === other) return true
+        if (other !is D) return false
+
+        return arr.contentEquals(other.arr)
+    }
+
+    override fun hashCode(): Int {
+        return arr.contentHashCode()
+    }
+
+    override fun toString(): String {
+        return "D(arr=${arr.contentToString()})"
+    }
+}
+
+fun main() {
+    val d1 = D(intArrayOf(1, 2, 3))
+    val d2 = D(intArrayOf(1, 2, 3))
+
+    println(d1)
+    println(d2)
+
+    println(d1 == d2)
+}
+```
+
+---
+
+
+
+#### 参考答案 （第3题）
+
+关键在于：data class 自动生成的 hashCode() 会使用 name 属性。
+
+创建对象：
+
+```kotlin
+val p = P("a")
+```
+
+此时：
+
+```
+name = "a"
+```
+假设：
+```
+hashCode(P("a")) = 100
+```
+
+---
+
+<style scoped>
+table {
+  font-size: 16px;
+}
+pre, code {
+  font-size: 12px;
+}
+p, li {
+  font-size: 0.8em;
+}
+</style>
+
+执行：
+```kotlin
+val m = hashMapOf(p to 1)
+```
+此时 HashMap 内部存储了：
+```
+key: p (hashCode = 100) -> value: 1
+```
+执行：
+```kotlin
+p.name = "b"
+```
+
+由于 name 是 data class 的属性，hashCode() 也发生变化：
+
+```
+hashCode(P("b")) = 200
+```
+
+---
+
+此时再执行：
+```kotlin
+println(m[p])
+```
+
+HashMap 会根据当前的 HashCode 去寻找：
+```
+key: p (hashCode = 200)
+```
+但是 HashMap 内部存储的 key 是：
+```
+key: p (hashCode = 100)
+```
+
+因此找不到对应的 entry，返回 null。
+
+
+----
+
+#### 参考答案 （第4题）
+
+<!-- _footer: '' -->
+
+```java
+public class Book {
+
+    private String title;
+    private String author;
+    private int year;
+
+    public Book(String title, String author, int year) {
+        this.title = title;
+        this.author = author;
+        this.year = year;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(String author) {
+        this.author = author;
+    }
+
+    public int getYear() {
+        return year;
+    }
+
+    public void setYear(int year) {
+        this.year = year;
+    }
+
+    @Override
+    public String toString() {
+        return "Book{" +
+                "title='" + title + '\'' +
+                ", author='" + author + '\'' +
+                ", year=" + year +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        // equals implementation
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        // hashCode implementation
+        return 0;
+    }
+}
+```
+
+---
+
+```kotlin
+data class Book(
+    val title: String,
+    val author: String,
+    val year: Int
+)
+```
+
+----
 
 ## 第七章 集合与泛型
 

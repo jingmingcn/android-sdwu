@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Dark window background while the app starts, so system-dark users see no white flash. -->
+    <style name="Theme.TeachingFramework" parent="android:Theme.Material.NoActionBar" />
+</resources>

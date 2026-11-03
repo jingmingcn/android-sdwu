@@ -1,0 +1,57 @@
+package edu.sdwu.teaching
+
+import android.os.Bundle
+import androidx.activity.ComponentActivity
+import androidx.activity.SystemBarStyle
+import androidx.activity.compose.setContent
+import androidx.activity.enableEdgeToEdge
+import androidx.compose.foundation.isSystemInDarkTheme
+import androidx.compose.runtime.LaunchedEffect
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import dagger.hilt.android.AndroidEntryPoint
+import edu.sdwu.teaching.data.modules.ModuleHostFactory
+import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
+import edu.sdwu.teaching.domain.model.SessionState
+import edu.sdwu.teaching.domain.model.ThemeMode
+import edu.sdwu.teaching.ui.MainViewModel
+import edu.sdwu.teaching.ui.auth.AuthScreen
+import edu.sdwu.teaching.ui.navigation.TeachingAppRoot
+import edu.sdwu.teaching.ui.theme.TeachingTheme
+import javax.inject.Inject
+
+/** @AndroidEntryPoint lets Hilt inject into this Activity and its hiltViewModel() calls. */
+@AndroidEntryPoint
+class MainActivity : ComponentActivity() {
+
+    /** Builds the FunctionHost each module talks to; passed down to the navigation root. */
+    @Inject lateinit var moduleHostFactory: ModuleHostFactory
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        enableEdgeToEdge()
+        setContent {
+            val viewModel: MainViewModel = hiltViewModel()
+            val state = viewModel.uiState.collectAsStateWithLifecycle().value
+                ?: return@setContent // Wait for DataStore (a few ms) instead of flashing the wrong screen.
+            val prefs = state.preferences
+
+            val darkTheme = when (prefs.themeMode) {
+                ThemeMode.SYSTEM -> isSystemInDarkTheme()
+                ThemeMode.LIGHT -> false
+                ThemeMode.DARK -> true
+            }
+            // Status/navigation bar icons must follow the app theme, not only the system setting.
+            LaunchedEffect(darkTheme) {
+                val style = SystemBarStyle.auto(
+                    lightScrim = android.graphics.Color.TRANSPARENT,
+                    darkScrim = android.graphics.Color.TRANSPARENT,
+                ) { darkTheme }
+                enableEdgeToEdge(statusBarStyle = style, navigationBarStyle = style)
+            }
+            TeachingTheme(darkTheme = darkTheme, dynamicColor = prefs.dynamicColor) {
+                // Auth gate: signed-out users see the login screen; guests and accounts see the app.
+                if (state.session is SessionState.SignedOut) AuthScreen() else TeachingAppRoot(hostFactory = moduleHostFactory)
+            }
+        }
+    }
+}

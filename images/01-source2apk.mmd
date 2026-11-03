@@ -1,0 +1,22 @@
+flowchart LR
+    %% 源码与资源输入
+    A1[Kotlin/Java 源码]
+    A2[资源文件 res/]
+    A3[AndroidManifest.xml]
+
+    %% 编译路径
+    A1 --> B1[Kotlin 编译]
+    B1 --> B2[.class 文件]
+    B2 --> B3[D8 / R8]
+    B3 --> B4[.dex 文件]
+
+    A2 --> C[AAPT2 编译资源]
+    A3 --> C
+    C --> D[编译后的资源]
+
+    %% 合并打包
+    B4 --> E[打包]
+    D --> E
+    E --> F[签名]
+    F --> G[对齐 zipalign]
+    G --> H[APK]
