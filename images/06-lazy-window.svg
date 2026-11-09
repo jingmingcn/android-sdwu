@@ -1,0 +1,82 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 590" width="1200" height="590" font-family="'PingFang SC','Microsoft YaHei','Noto Sans CJK SC',sans-serif">
+<style>
+.h{font-size:22px;font-weight:700;fill:#551645}
+.m{font-family:Menlo,Consolas,monospace}
+.t{font-size:15px;fill:#8c8c8c}
+.on{fill:#954c81}
+.ont{fill:#fff;font-size:15px}
+.pre{fill:#e4d2e0;stroke:#954c81;stroke-width:1.5}
+.pret{fill:#551645;font-size:15px}
+.off{fill:none;stroke:#bfbfbf;stroke-width:1.5;stroke-dasharray:5 4}
+.offt{fill:#bfbfbf;font-size:15px}
+.vp{fill:none;stroke:#211112;stroke-width:3}
+</style>
+
+<text class="h" x="60" y="40">Column + forEach</text>
+<text class="t" x="60" y="66">一次性组合全部数据</text>
+<rect class="on" x="80" y="90" width="300" height="32" rx="6"/>
+<text class="ont m" x="94" y="112">item 0</text>
+<rect class="on" x="80" y="128" width="300" height="32" rx="6"/>
+<text class="ont m" x="94" y="150">item 1</text>
+<rect class="on" x="80" y="166" width="300" height="32" rx="6"/>
+<text class="ont m" x="94" y="188">item 2</text>
+<rect class="on" x="80" y="204" width="300" height="32" rx="6"/>
+<text class="ont m" x="94" y="226">item 3</text>
+<rect class="on" x="80" y="242" width="300" height="32" rx="6"/>
+<text class="ont m" x="94" y="264">item 4</text>
+<rect class="on" x="80" y="280" width="300" height="32" rx="6"/>
+<text class="ont m" x="94" y="302">item 5</text>
+<rect class="on" x="80" y="318" width="300" height="32" rx="6"/>
+<text class="ont m" x="94" y="340">item 6</text>
+<rect class="on" x="80" y="356" width="300" height="32" rx="6"/>
+<text class="ont m" x="94" y="378">item 7</text>
+<rect class="on" x="80" y="394" width="300" height="32" rx="6"/>
+<text class="ont m" x="94" y="416">item 8</text>
+<rect class="on" x="80" y="432" width="300" height="32" rx="6"/>
+<text class="ont m" x="94" y="454">item 9</text>
+<rect class="on" x="80" y="470" width="300" height="32" rx="6"/>
+<text class="ont m" x="94" y="492">item 10</text>
+<rect class="on" x="80" y="508" width="300" height="32" rx="6"/>
+<text class="ont m" x="94" y="530">item 11</text>
+<text class="t" x="230" y="564" text-anchor="middle">… item 999 也都已组合、测量</text>
+<rect class="vp" x="66" y="200" width="328" height="230" rx="16"/>
+<text x="404" y="320" font-size="15" fill="#211112">屏幕</text>
+<text class="h" x="640" y="40">LazyColumn</text>
+<text class="t" x="640" y="66">只组合「看得见的 + 即将出现的」</text>
+<rect class="off" x="660" y="90" width="300" height="32" rx="6"/>
+<text class="offt m" x="674" y="112">item 0</text>
+<text class="offt" x="948" y="112" text-anchor="end">已移出 → 槽位复用</text>
+<rect class="off" x="660" y="128" width="300" height="32" rx="6"/>
+<text class="offt m" x="674" y="150">item 1</text>
+<text class="offt" x="948" y="150" text-anchor="end">已移出 → 槽位复用</text>
+<rect class="off" x="660" y="166" width="300" height="32" rx="6"/>
+<text class="offt m" x="674" y="188">item 2</text>
+<text class="offt" x="948" y="188" text-anchor="end">已移出 → 槽位复用</text>
+<rect class="on" x="660" y="204" width="300" height="32" rx="6"/>
+<text class="ont m" x="674" y="226">item 3</text>
+<rect class="on" x="660" y="242" width="300" height="32" rx="6"/>
+<text class="ont m" x="674" y="264">item 4</text>
+<rect class="on" x="660" y="280" width="300" height="32" rx="6"/>
+<text class="ont m" x="674" y="302">item 5</text>
+<rect class="on" x="660" y="318" width="300" height="32" rx="6"/>
+<text class="ont m" x="674" y="340">item 6</text>
+<rect class="on" x="660" y="356" width="300" height="32" rx="6"/>
+<text class="ont m" x="674" y="378">item 7</text>
+<rect class="on" x="660" y="394" width="300" height="32" rx="6"/>
+<text class="ont m" x="674" y="416">item 8</text>
+<rect class="pre" x="660" y="432" width="300" height="32" rx="6"/>
+<text class="pret m" x="674" y="454">item 9</text>
+<text class="pret" x="948" y="454" text-anchor="end">预取 prefetch</text>
+<rect class="off" x="660" y="470" width="300" height="32" rx="6"/>
+<text class="offt m" x="674" y="492">item 10</text>
+<text class="offt" x="948" y="492" text-anchor="end">尚未组合</text>
+<rect class="off" x="660" y="508" width="300" height="32" rx="6"/>
+<text class="offt m" x="674" y="530">item 11</text>
+<text class="offt" x="948" y="530" text-anchor="end">尚未组合</text>
+<rect class="vp" x="646" y="200" width="328" height="230" rx="16"/>
+<text x="984" y="320" font-size="15" fill="#211112">屏幕</text>
+<path d="M1060,180 V450" stroke="#551645" stroke-width="2.5" marker-end="url(#a)" marker-start="url(#a)"/>
+<defs><marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#551645"/></marker></defs>
+<text x="1074" y="320" font-size="15" fill="#551645">滚动</text>
+<text class="t" x="640" y="564">内存与耗时只和「屏幕能放下几项」有关，与总数无关</text>
+</svg>

@@ -1,0 +1,63 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 430" width="1200" height="430" font-family="'PingFang SC','Microsoft YaHei','Noto Sans CJK SC',sans-serif">
+  <style>
+    .ev{font-size:16px;fill:#551645;font-weight:700}
+    .row{font-size:19px;fill:#211112;font-weight:700}
+    .code{font-family:Menlo,Consolas,monospace}
+    .vl{stroke:#af79a1;stroke-width:1.5;stroke-dasharray:5 5}
+    .keep{fill:#954c81}
+    .keepg{fill:#627a1f}
+    .short{fill:#bfbfbf}
+    .lg{font-size:15px;fill:#8c8c8c}
+  </style>
+  <!-- event columns -->
+  <text class="ev" x="300" y="50" text-anchor="middle">首次组合</text>
+  <text class="ev" x="440" y="50" text-anchor="middle">重组</text>
+  <text class="ev" x="580" y="50" text-anchor="middle">重组</text>
+  <text class="ev" x="740" y="40" text-anchor="middle">配置变更</text>
+  <text class="ev" x="740" y="62" text-anchor="middle">（旋转屏幕）</text>
+  <text class="ev" x="900" y="50" text-anchor="middle">重组</text>
+  <text class="ev" x="1070" y="40" text-anchor="middle">进程被杀</text>
+  <text class="ev" x="1070" y="62" text-anchor="middle">后恢复</text>
+  <line class="vl" x1="300" y1="78" x2="300" y2="370"/>
+  <line class="vl" x1="440" y1="78" x2="440" y2="370"/>
+  <line class="vl" x1="580" y1="78" x2="580" y2="370"/>
+  <line class="vl" x1="740" y1="78" x2="740" y2="370"/>
+  <line class="vl" x1="900" y1="78" x2="900" y2="370"/>
+  <line class="vl" x1="1070" y1="78" x2="1070" y2="370"/>
+
+  <!-- rows -->
+  <text class="row" x="20" y="125">普通 var</text>
+  <rect class="short" x="300" y="105" width="132" height="26" rx="6"/>
+  <rect class="short" x="448" y="105" width="124" height="26" rx="6"/>
+  <rect class="short" x="588" y="105" width="144" height="26" rx="6"/>
+  <rect class="short" x="748" y="105" width="144" height="26" rx="6"/>
+  <rect class="short" x="908" y="105" width="154" height="26" rx="6"/>
+  <rect class="short" x="1078" y="105" width="100" height="26" rx="6"/>
+
+  <text class="row code" x="20" y="195">remember</text>
+  <rect class="keep" x="300" y="175" width="432" height="26" rx="6"/>
+  <rect class="keep" x="748" y="175" width="314" height="26" rx="6"/>
+  <rect class="keep" x="1078" y="175" width="100" height="26" rx="6"/>
+
+  <text class="row code" x="20" y="265">rememberSaveable</text>
+  <rect class="keepg" x="300" y="245" width="878" height="26" rx="6"/>
+
+  <text class="row" x="20" y="335">ViewModel</text>
+  <rect class="keep" x="300" y="315" width="762" height="26" rx="6"/>
+  <rect class="keep" x="1078" y="315" width="100" height="26" rx="6"/>
+
+  <!-- reset marks -->
+  <g font-size="18" font-weight="700" fill="#ffffff" text-anchor="middle">
+    <g fill="#b3412f"><circle cx="440" cy="118" r="11"/><circle cx="580" cy="118" r="11"/><circle cx="740" cy="118" r="11"/><circle cx="900" cy="118" r="11"/><circle cx="1070" cy="118" r="11"/>
+    <circle cx="740" cy="188" r="11"/><circle cx="1070" cy="188" r="11"/><circle cx="1070" cy="328" r="11"/></g>
+    <text x="440" y="124">×</text><text x="580" y="124">×</text><text x="740" y="124">×</text><text x="900" y="124">×</text><text x="1070" y="124">×</text>
+    <text x="740" y="194">×</text><text x="1070" y="194">×</text><text x="1070" y="334">×</text>
+  </g>
+
+  <!-- legend -->
+  <rect class="keep" x="300" y="392" width="40" height="16" rx="4"/>
+  <text class="lg" x="350" y="406">值一直保留</text>
+  <circle cx="480" cy="400" r="10" fill="#b3412f"/><text x="480" y="406" font-size="16" fill="#fff" text-anchor="middle" font-weight="700">×</text>
+  <text class="lg" x="498" y="406">值丢失，回到初始值</text>
+  <text class="lg" x="690" y="406">ViewModel 想扛住进程重建 → 配合 SavedStateHandle</text>
+</svg>

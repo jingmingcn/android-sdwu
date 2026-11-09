@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 450" width="1100" height="450" font-family="'PingFang SC','Microsoft YaHei','Noto Sans CJK SC',sans-serif">
+  <defs>
+    <marker id="d" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#627a1f"/></marker>
+  </defs>
+  <style>
+    .run{fill:#954c81;stroke:#551645;stroke-width:2}
+    .runt{fill:#ffffff;font-size:18px;font-family:Menlo,Consolas,monospace}
+    .skip{fill:#f0f0f0;stroke:#bfbfbf;stroke-width:2;stroke-dasharray:6 4}
+    .skipt{fill:#8c8c8c;font-size:18px;font-family:Menlo,Consolas,monospace}
+    .inl{fill:#e4d2e0;stroke:#954c81;stroke-width:2}
+    .inlt{fill:#551645;font-size:18px;font-family:Menlo,Consolas,monospace}
+    .e{stroke:#af79a1;stroke-width:2}
+    .note{font-size:15px;fill:#8c8c8c}
+  </style>
+  <!-- state -->
+  <rect x="30" y="30" width="230" height="58" rx="29" fill="#e6eed3" stroke="#627a1f" stroke-width="2"/>
+  <text x="145" y="66" text-anchor="middle" font-size="18" fill="#3d4d13" font-family="Menlo,Consolas,monospace">count: State</text>
+  <path d="M260,59 H446" stroke="#627a1f" stroke-width="2" stroke-dasharray="6 4" marker-end="url(#d)"/>
+  <text x="320" y="48" font-size="15" fill="#627a1f">被读取</text>
+  <text x="30" y="114" font-size="14" fill="#627a1f">读取发生在 Column 的内联 lambda 中，</text>
+  <text x="30" y="134" font-size="14" fill="#627a1f">所以登记到的是 Screen 的作用域</text>
+
+  <!-- edges -->
+  <line class="e" x1="550" y1="88" x2="550" y2="140"/>
+  <line class="e" x1="550" y1="198" x2="190" y2="260"/>
+  <line class="e" x1="550" y1="198" x2="550" y2="260"/>
+  <line class="e" x1="550" y1="198" x2="910" y2="260"/>
+  <line class="e" x1="910" y1="318" x2="910" y2="360"/>
+
+  <rect class="run" x="450" y="30" width="200" height="58" rx="10"/>
+  <text class="runt" x="550" y="66" text-anchor="middle">Screen()</text>
+
+  <rect class="inl" x="450" y="140" width="200" height="58" rx="10"/>
+  <text class="inlt" x="550" y="176" text-anchor="middle">Column { }</text>
+  <text class="note" x="664" y="166">inline 函数，没有独立作用域，</text>
+  <text class="note" x="664" y="188">随 Screen 一起执行</text>
+
+  <rect class="skip" x="90" y="260" width="200" height="58" rx="10"/>
+  <text class="skipt" x="190" y="296" text-anchor="middle">Header()</text>
+  <text class="note" x="190" y="342" text-anchor="middle">参数没变 → 跳过</text>
+
+  <rect class="run" x="430" y="260" width="240" height="58" rx="10"/>
+  <text class="runt" x="550" y="296" text-anchor="middle">Text("计数：…")</text>
+  <text x="550" y="342" text-anchor="middle" font-size="15" fill="#551645">参数变了 → 重新执行</text>
+
+  <rect class="skip" x="810" y="260" width="200" height="58" rx="10"/>
+  <text class="skipt" x="910" y="296" text-anchor="middle">Button()</text>
+  <rect class="skip" x="810" y="360" width="200" height="58" rx="10"/>
+  <text class="skipt" x="910" y="396" text-anchor="middle">Text("加一")</text>
+  <text class="note" x="1020" y="296">跳过</text>
+  <text class="note" x="1020" y="396">跳过</text>
+
+  <!-- legend -->
+  <rect class="run" x="30" y="392" width="34" height="22" rx="5"/><text x="74" y="409" font-size="15" fill="#211112">本次重组执行</text>
+  <rect class="skip" x="200" y="392" width="34" height="22" rx="5"/><text x="244" y="409" font-size="15" fill="#211112">本次被跳过</text>
+  <rect class="inl" x="360" y="392" width="34" height="22" rx="5"/><text x="404" y="409" font-size="15" fill="#211112">内联布局</text>
+</svg>

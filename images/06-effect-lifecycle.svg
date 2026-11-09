@@ -1,0 +1,63 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 440" width="1200" height="440" font-family="'PingFang SC','Microsoft YaHei','Noto Sans CJK SC',sans-serif">
+  <style>
+    .ev{font-size:16px;font-weight:700;fill:#551645}
+    .row{font-family:Menlo,Consolas,monospace;font-size:17px;fill:#211112;font-weight:700}
+    .vl{stroke:#af79a1;stroke-width:1.5;stroke-dasharray:5 5}
+    .co{fill:#954c81}
+    .cot{font-size:14px;fill:#fff}
+    .dis{fill:#e6eed3;stroke:#627a1f;stroke-width:2}
+    .dist{font-size:14px;fill:#3d4d13}
+    .sc{fill:#e4d2e0}
+    .x{fill:#b3412f}
+    .note{font-size:14px;fill:#8c8c8c}
+  </style>
+  <text class="ev" x="300" y="40" text-anchor="middle">进入组合</text>
+  <text class="ev" x="300" y="62" text-anchor="middle" font-weight="400">userId = 1</text>
+  <text class="ev" x="520" y="40" text-anchor="middle">重组</text>
+  <text class="ev" x="520" y="62" text-anchor="middle" font-weight="400">key 未变</text>
+  <text class="ev" x="760" y="40" text-anchor="middle">重组</text>
+  <text class="ev" x="760" y="62" text-anchor="middle" font-weight="400">userId 1 → 2</text>
+  <text class="ev" x="1080" y="40" text-anchor="middle">离开组合</text>
+  <text class="ev" x="1080" y="62" text-anchor="middle" font-weight="400">页面关闭/if 为假</text>
+  <line class="vl" x1="300" y1="76" x2="300" y2="390"/>
+  <line class="vl" x1="520" y1="76" x2="520" y2="390"/>
+  <line class="vl" x1="760" y1="76" x2="760" y2="390"/>
+  <line class="vl" x1="1080" y1="76" x2="1080" y2="390"/>
+
+  <!-- LaunchedEffect -->
+  <text class="row" x="20" y="125">LaunchedEffect</text>
+  <text class="row" x="20" y="147">(userId)</text>
+  <rect class="co" x="300" y="108" width="450" height="32" rx="6"/>
+  <text class="cot" x="316" y="129">协程 #1：load(1) …</text>
+  <rect class="co" x="770" y="108" width="300" height="32" rx="6"/>
+  <text class="cot" x="786" y="129">协程 #2：load(2) …</text>
+  <circle class="x" cx="760" cy="124" r="11"/><text x="760" y="130" text-anchor="middle" fill="#fff" font-size="16" font-weight="700">×</text>
+  <circle class="x" cx="1080" cy="124" r="11"/><text x="1080" y="130" text-anchor="middle" fill="#fff" font-size="16" font-weight="700">×</text>
+  <text class="note" x="530" y="164">key 相同 → 继续跑，不重启</text>
+  <text class="note" x="770" y="164">取消旧协程，启动新协程</text>
+
+  <!-- DisposableEffect -->
+  <text class="row" x="20" y="225">DisposableEffect</text>
+  <text class="row" x="20" y="247">(userId)</text>
+  <rect class="dis" x="300" y="208" width="450" height="32" rx="6"/>
+  <text class="dist" x="316" y="229">register(1)　已注册</text>
+  <rect class="dis" x="770" y="208" width="300" height="32" rx="6"/>
+  <text class="dist" x="786" y="229">register(2)　已注册</text>
+  <rect x="704" y="248" width="112" height="26" rx="13" fill="#627a1f"/><text x="760" y="266" text-anchor="middle" font-size="14" fill="#fff">onDispose</text>
+  <rect x="1024" y="248" width="112" height="26" rx="13" fill="#627a1f"/><text x="1080" y="266" text-anchor="middle" font-size="14" fill="#fff">onDispose</text>
+  <text class="note" x="300" y="268">先 onDispose 清理旧的，再执行新的</text>
+
+  <!-- rememberCoroutineScope -->
+  <text class="row" x="20" y="330">rememberCoroutine</text>
+  <text class="row" x="20" y="352">Scope()</text>
+  <rect class="sc" x="300" y="318" width="770" height="32" rx="6"/>
+  <text x="316" y="339" font-size="14" fill="#551645">scope 存活期（不受 key 影响）</text>
+  <g fill="#954c81"><rect x="580" y="322" width="90" height="24" rx="12"/><rect x="880" y="322" width="90" height="24" rx="12"/></g>
+  <text x="625" y="339" text-anchor="middle" font-size="13" fill="#fff">点击 launch</text>
+  <text x="925" y="339" text-anchor="middle" font-size="13" fill="#fff">点击 launch</text>
+  <circle class="x" cx="1080" cy="334" r="11"/><text x="1080" y="340" text-anchor="middle" fill="#fff" font-size="16" font-weight="700">×</text>
+  <text class="note" x="580" y="372">协程由事件回调手动启动</text>
+
+  <circle class="x" cx="310" cy="418" r="9"/><text x="310" y="423" text-anchor="middle" fill="#fff" font-size="13" font-weight="700">×</text>
+  <text class="note" x="326" y="423">= 协程被自动取消。离开组合时，三者都会被自动清理，不会泄漏</text>
+</svg>

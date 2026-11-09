@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" viewBox="0 0 1200 400" width="1200" height="400" font-family="'PingFang SC','Microsoft YaHei','Noto Sans CJK SC',sans-serif">
+  <defs>
+    <marker id="p" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#551645"/></marker>
+    <marker id="g" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#627a1f"/></marker>
+  </defs>
+  <style>
+    .b{fill:#f2e9ef;stroke:#954c81;stroke-width:2}
+    .h{font-size:22px;font-weight:700;fill:#551645}
+    .m{font-family:Menlo,Consolas,monospace;font-size:15px;fill:#211112}
+    .t{font-size:16px;fill:#211112}
+    .ls{font-size:17px;font-weight:700;fill:#551645}
+    .le{font-size:17px;font-weight:700;fill:#627a1f}
+  </style>
+  <!-- user -->
+  <circle cx="80" cy="170" r="26" fill="#af79a1"/>
+  <path d="M38,250 Q80,196 122,250 Z" fill="#af79a1"/>
+  <text x="80" y="290" text-anchor="middle" class="t">用户</text>
+
+  <rect class="b" x="180" y="90" width="270" height="220" rx="14"/>
+  <text class="h" x="315" y="130" text-anchor="middle">UI 层</text>
+  <text class="t" x="315" y="160" text-anchor="middle">@Composable（无状态）</text>
+  <text class="m" x="200" y="200">collectAsStateWith-</text>
+  <text class="m" x="200" y="222">Lifecycle()</text>
+  <text class="t" x="200" y="262">只负责：把状态画出来、</text>
+  <text class="t" x="200" y="286">把事件交出去</text>
+
+  <rect class="b" x="560" y="90" width="300" height="220" rx="14"/>
+  <text class="h" x="710" y="130" text-anchor="middle">ViewModel</text>
+  <text class="m" x="580" y="170">_uiState: MutableStateFlow</text>
+  <text class="m" x="580" y="196">uiState: StateFlow&lt;UiState&gt;</text>
+  <text class="m" x="580" y="236">fun onAdd(title: String) {</text>
+  <text class="m" x="580" y="258">  _uiState.update {</text>
+  <text class="m" x="580" y="280">    it.copy(…) } }</text>
+
+  <rect class="b" x="960" y="90" width="210" height="220" rx="14"/>
+  <text class="h" x="1065" y="130" text-anchor="middle">数据层</text>
+  <text class="t" x="1065" y="170" text-anchor="middle">Repository</text>
+  <text class="t" x="1065" y="200" text-anchor="middle">Room / 网络</text>
+  <text class="t" x="1065" y="240" text-anchor="middle">（第八、九章）</text>
+
+  <!-- user <-> UI -->
+  <path d="M112,160 H174" stroke="#627a1f" stroke-width="2.5" marker-end="url(#g)"/>
+  <!-- state flows left (top) -->
+  <path d="M554,140 H456" stroke="#551645" stroke-width="3" marker-end="url(#p)"/>
+  <path d="M954,140 H866" stroke="#551645" stroke-width="3" marker-end="url(#p)"/>
+  <text class="ls" x="505" y="70" text-anchor="middle">状态 UiState（向下流）</text>
+  <text class="ls" x="910" y="70" text-anchor="middle">数据</text>
+  <!-- events flow right (bottom) -->
+  <path d="M456,260 H554" stroke="#627a1f" stroke-width="3" stroke-dasharray="8 5" marker-end="url(#g)"/>
+  <path d="M866,260 H954" stroke="#627a1f" stroke-width="3" stroke-dasharray="8 5" marker-end="url(#g)"/>
+  <text class="le" x="505" y="345" text-anchor="middle">事件（向上走）</text>
+  <text class="le" x="505" y="370" text-anchor="middle" font-weight="400" font-size="15">onAdd / onToggle</text>
+  <text class="le" x="910" y="345" text-anchor="middle">读写请求</text>
+  <text x="80" y="140" text-anchor="middle" font-size="15" fill="#627a1f">点击/输入</text>
+</svg>

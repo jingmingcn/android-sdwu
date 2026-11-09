@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 610" width="1200" height="610" font-family="'PingFang SC','Microsoft YaHei','Noto Sans CJK SC',sans-serif">
+<defs>
+<marker id="p" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#551645"/></marker>
+<marker id="g" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#627a1f"/></marker>
+</defs>
+<style>
+.q{fill:#f2e9ef;stroke:#954c81;stroke-width:2}
+.qt{font-size:19px;fill:#211112}
+.r{fill:#551645}
+.rt{font-family:Menlo,Consolas,monospace;font-size:18px;fill:#fff;font-weight:700}
+.rs{font-size:14px;fill:#e4d2e0}
+.yes{font-size:15px;fill:#627a1f;font-weight:700}
+.no{font-size:15px;fill:#551645;font-weight:700}
+</style>
+<rect class="q" x="40" y="20" width="600" height="64" rx="32"/>
+<text class="qt" x="340" y="59" text-anchor="middle">由用户事件触发？（点击、滑动回调里）</text>
+<path d="M640,52 H754" stroke="#627a1f" stroke-width="2.5" marker-end="url(#g)"/>
+<text class="yes" x="697" y="44" text-anchor="middle">是</text>
+<rect class="r" x="760" y="20" width="400" height="64" rx="10"/>
+<text class="rt" x="780" y="48">rememberCoroutineScope()</text>
+<text class="rs" x="780" y="72">scope.launch { … }</text>
+<path d="M340,84 V118" stroke="#551645" stroke-width="2.5" marker-end="url(#p)"/>
+<text class="no" x="352" y="108">否</text>
+<rect class="q" x="40" y="124" width="600" height="64" rx="32"/>
+<text class="qt" x="340" y="163" text-anchor="middle">需要「注册 → 注销」成对清理？</text>
+<path d="M640,156 H754" stroke="#627a1f" stroke-width="2.5" marker-end="url(#g)"/>
+<text class="yes" x="697" y="148" text-anchor="middle">是</text>
+<rect class="r" x="760" y="124" width="400" height="64" rx="10"/>
+<text class="rt" x="780" y="152">DisposableEffect(key)</text>
+<text class="rs" x="780" y="176">onDispose { 注销 }</text>
+<path d="M340,188 V222" stroke="#551645" stroke-width="2.5" marker-end="url(#p)"/>
+<text class="no" x="352" y="212">否</text>
+<rect class="q" x="40" y="228" width="600" height="64" rx="32"/>
+<text class="qt" x="340" y="267" text-anchor="middle">进入页面 / 某个值变化时执行挂起任务？</text>
+<path d="M640,260 H754" stroke="#627a1f" stroke-width="2.5" marker-end="url(#g)"/>
+<text class="yes" x="697" y="252" text-anchor="middle">是</text>
+<rect class="r" x="760" y="228" width="400" height="64" rx="10"/>
+<text class="rt" x="780" y="256">LaunchedEffect(key)</text>
+<text class="rs" x="780" y="280">key 变 → 取消并重启</text>
+<path d="M340,292 V326" stroke="#551645" stroke-width="2.5" marker-end="url(#p)"/>
+<text class="no" x="352" y="316">否</text>
+<rect class="q" x="40" y="332" width="600" height="64" rx="32"/>
+<text class="qt" x="340" y="371" text-anchor="middle">要把外部数据源变成 State？</text>
+<path d="M640,364 H754" stroke="#627a1f" stroke-width="2.5" marker-end="url(#g)"/>
+<text class="yes" x="697" y="356" text-anchor="middle">是</text>
+<rect class="r" x="760" y="332" width="400" height="64" rx="10"/>
+<text class="rt" x="780" y="360">produceState / collectAsState…</text>
+<text class="rs" x="780" y="384">Flow → State</text>
+<path d="M340,396 V430" stroke="#551645" stroke-width="2.5" marker-end="url(#p)"/>
+<text class="no" x="352" y="420">否</text>
+<rect class="q" x="40" y="436" width="600" height="64" rx="32"/>
+<text class="qt" x="340" y="475" text-anchor="middle">State 由其他 State 计算、且变化很频繁？</text>
+<path d="M640,468 H754" stroke="#627a1f" stroke-width="2.5" marker-end="url(#g)"/>
+<text class="yes" x="697" y="460" text-anchor="middle">是</text>
+<rect class="r" x="760" y="436" width="400" height="64" rx="10"/>
+<text class="rt" x="780" y="464">derivedStateOf { }</text>
+<text class="rs" x="780" y="488">结果变了才重组</text>
+<path d="M340,500 V534" stroke="#551645" stroke-width="2.5" marker-end="url(#p)"/>
+<text class="no" x="352" y="524">否</text>
+<rect x="40" y="540" width="600" height="56" rx="10" fill="#ffffff" stroke="#bfbfbf" stroke-width="2" stroke-dasharray="6 4"/>
+<text class="qt" x="340" y="575" text-anchor="middle" fill="#8c8c8c">每次成功重组后同步给非 Compose 对象 → SideEffect</text>
+</svg>
